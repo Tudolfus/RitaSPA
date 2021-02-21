@@ -1,24 +1,34 @@
-import React, { Component, Fragment, ReactNode } from "react";
+import React, { Component, Fragment } from "react";
+import { getProduct } from '../../rest/product/RestProduct';
 
-class Product extends Component<unknown, unknown> {
+class Product extends Component<unknown, any> {
     constructor(props: unknown) {
         super(props);
+
+        this.state = {
+            name: 'no',
+            price: 29
+        }
     }
 
-    // componentDidMount() {
+    async componentDidMount() {
+        const product = await getProduct('Сок Я апельсин с мякотью 970 мл');
+        console.log(product);
+        this.setState({ name: product.data[0].name, price: product.data[0].price });
+    }
 
-    // }
+    render() {
+        const { name, price } = this.state;
 
-    render(): ReactNode {
         return (
             <Fragment>
                 <div>
                     <span>Имя</span>
-                    <span></span>
+                    <span>{name}</span>
                 </div>
                 <div>
                     <span>Цена</span>
-                    <span></span>
+                    <span>{price}</span>
                 </div>
             </Fragment>
 
