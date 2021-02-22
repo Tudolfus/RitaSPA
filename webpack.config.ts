@@ -5,7 +5,9 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config: webpack.Configuration = {
+  mode: 'development',
   entry: "./src/index.tsx",
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -33,9 +35,7 @@ const config: webpack.Configuration = {
   },
   devServer: {
     contentBase: path.join(__dirname, "build"),
-    compress: true,
-    port: 5000,
-    open: true
+    port: 5000
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({
